@@ -1,0 +1,40 @@
+<script src="https://fb.me/react-15.2.1.js"></script>
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<style>
+  * {font-family: verdana; padding: 0; margin: 10px;}
+  body {background-color: #f5f5f5;}
+  button {padding: 5px;}
+</style>
+
+<div id="container"></div>
+
+<script type="text/babel">
+  var HelloWorld = React.createClass({
+    getInitialState: function() {
+      return {
+        count: 0
+      }
+    },
+
+    buttonClicked: function() {
+      this.setState({count: this.state.count + 1});
+    },
+
+    render: function() {
+      return (
+        <div>
+          <div>Hello World!</div>
+          <div>Current Count: {this.state.count}</div>
+          <button onClick={this.buttonClicked}>Click Me!</button>
+        </div>
+      )
+    }
+  });
+
+  ReactDOM.render(
+    <HelloWorld />,
+    document.getElementById('container')
+);
+</script>

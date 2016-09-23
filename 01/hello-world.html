@@ -1,0 +1,25 @@
+<script src="https://fb.me/react-15.2.1.js"></script> 
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+
+<style>
+  * {font-family: verdana; padding: 0; margin: 10px;}
+  body {background-color: #f5f5f5;} 
+</style>
+
+<div id="container"></div> 
+
+<script type="text/javascript">
+
+  var HelloWorld = React.createClass({ 
+    render: function() {
+      return React.createElement("div", null, "Hello World!"); 
+    }
+  });
+
+  ReactDOM.render(
+    React.createElement(HelloWorld),
+    document.getElementById('container')
+  );
+
+</script>
+
