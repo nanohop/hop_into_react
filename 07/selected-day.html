@@ -1,0 +1,73 @@
+<script src="https://fb.me/react-15.2.1.js"></script>
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<style>
+  * {font-family: verdana;}
+  body {background-color: #f5f5f5; padding: 0; margin: 10px;}
+  .selectedDay {width: 350px;}
+  input {width:275px; font-size:20px; display: block; margin:10px 0;}
+  button {float:right; line-height: 25px; font-size:18px; padding: 2px 10px;}
+  ul {list-style: none; padding: 0;}
+  li {margin: 0; padding: 10px; border-bottom: 1px solid #ddd;}
+</style>
+
+<div id="container"></div>
+
+<script type="text/babel">
+  
+  var SelectedDay = React.createClass({
+    getInitialState: function() {
+      return {
+        todos: [],
+        inputValue: ""
+      }
+    },
+
+    renderDate: function() {
+      var month = this.props.currentMonth.getMonth() + 1;
+      var day = this.props.selectedDay;
+      var year = this.props.currentMonth.getFullYear();
+      return <span>Selected Day: {month}/{day}/{year}</span>
+    },
+
+    addTodo() {
+      var newTodos = this.state.todos.concat(this.state.inputValue);
+      this.setState({todos: newTodos, inputValue: ""});
+    },
+    
+    inputChanged: function(e) {
+      this.setState({inputValue: e.target.value});
+    },
+  
+    renderTodos: function() {
+      return this.state.todos.map(function(todo) {
+        return <li key={todo}>{todo}</li>
+      }, this);
+    },
+
+    render: function() {
+      if(!this.props.selectedDay) {
+        return null;
+      }
+
+      return (
+        <div className="selectedDay">
+          {this.renderDate()}
+          <div>
+            <button onClick={this.addTodo}>Add</button>
+            <input type="text" onChange={this.inputChanged} value={this.state.inputValue} />
+          </div>
+          <ul>
+            {this.renderTodos()}
+          </ul>
+        </div>
+      )
+    }
+  });
+
+  ReactDOM.render(
+    <SelectedDay currentMonth={new Date(2016, 8)} selectedDay={1} />, 
+    document.getElementById('container'));
+
+</script>

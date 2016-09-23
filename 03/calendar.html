@@ -1,0 +1,89 @@
+<script src="https://fb.me/react-15.2.1.js"></script>
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<style>
+  * {font-family: verdana;}
+  body {background-color: #f5f5f5; padding: 0; margin: 10px;}
+
+  .calendar {
+    width: 350px;
+    background: #0066cc;
+    font-size: 20px;
+    color: #ffffff; 
+  }
+  .currentMonth {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ffffff;
+  }
+  .day {
+    display: inline-block;
+    width: 50px;
+    padding: 12px 0;
+    text-align: center;
+  }
+</style>
+
+<div id="container"></div>
+
+<script type="text/babel">
+
+  var Day = React.createClass({
+    render: function() {
+      return <span className="day">{this.props.number}</span>
+    }
+  });
+
+  var CurrentMonth = React.createClass({
+    render: function() {
+      var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+      var monthLabel = months[this.props.date.getMonth()]
+      return <div className="currentMonth">{monthLabel}, {this.props.date.getFullYear()}</div>
+    }
+  });
+
+  var Calendar = React.createClass({
+
+    renderHeader: function() {
+      return ["Su", "M", "Tu", "W", "Th", "F", "Sa"].map(function(day) {
+        return <span className="day">{day}</span>
+      });
+    },
+
+    renderBlanks: function() {
+      var blankWidth = 50 * this.props.date.getDay();
+      return <span className="day" style={{width: blankWidth}}></span>
+    },
+    
+    daysOfMonth: function() {
+      var endOfMonth = new Date(this.props.date.getFullYear(), this.props.date.getMonth()+1, 0);
+      var dayNumbers = [];
+      for(var i = 1; i <= endOfMonth.getDate(); i++) {
+        dayNumbers.push(i);
+      }
+      return dayNumbers;  
+    },
+
+    renderDays: function() {
+      return this.daysOfMonth().map(function(number) {
+        return <Day number={number} />
+      });
+    },
+
+    render: function() {
+      return (
+        <div className="calendar">
+          <CurrentMonth date={this.props.date} />
+          {this.renderHeader()}
+          {this.renderBlanks()}
+          {this.renderDays()}
+        </div>
+      )
+    }
+
+  });
+
+  ReactDOM.render(<Calendar date={new Date(2016, 8)} />, document.getElementById('container'));
+
+</script>

@@ -1,0 +1,157 @@
+<script src="https://fb.me/react-15.2.1.js"></script>
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<style>
+  * {font-family: verdana;}
+  body {background-color: #f5f5f5; padding: 0; margin: 10px;}
+
+  .calendar {
+    width: 350px;
+    margin-left:165px;
+    background: #0066cc;
+    font-size: 20px;
+    color: #ffffff; 
+  }
+  .currentMonth {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ffffff;
+  }
+  .day {
+    display: inline-block;
+    width: 50px;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .prev {
+    float:left;
+    padding: 15px 0 15px 10px;
+  }
+  .next {
+    float:right;
+    padding: 15px 10px 15px 0;
+  }
+</style>
+
+<div id="container"></div>
+
+<script type="text/babel">
+  
+  var SelectedDay = React.createClass({
+    renderDate: function() {
+      if(this.props.selectedDay) {
+        var month = this.props.currentMonth.getMonth() + 1;
+        var day = this.props.selectedDay;
+        var year = this.props.currentMonth.getFullYear();
+        return <span>{month}/{day}/{year}</span>    
+      }
+    },
+
+    render: function() {
+      return <div>{this.renderDate()}</div>
+    }
+  });
+
+  var Day = React.createClass({
+    selectDay: function() {
+      this.props.onClick(this.props.number);
+    },
+
+    render: function() {
+      return <span className="day" onClick={this.selectDay}>{this.props.number}</span>
+    }
+  });
+
+  var CurrentMonth = React.createClass({
+    render: function() {
+      var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+      var monthLabel = months[this.props.date.getMonth()]
+      return <div className="currentMonth">{monthLabel}, {this.props.date.getFullYear()}</div>
+    }
+  });
+
+  var PrevMonth = React.createClass({
+    render: function() {
+      return <a className="prev" onClick={this.props.onClick}>&lt;</a>
+    }
+  });
+
+  var NextMonth = React.createClass({
+    render: function() {
+      return <a className="next" onClick={this.props.onClick}>&gt;</a>
+    }
+  });
+
+  var Calendar = React.createClass({
+
+    getInitialState: function() {
+      var now = new Date();
+      return {
+        date: new Date(now.getFullYear(), now.getMonth()),
+        selectedDay: null
+      }
+    },
+
+    renderHeader: function() {
+      return ["Su", "M", "Tu", "W", "Th", "F", "Sa"].map(function(day) {
+        return <span className="day">{day}</span>
+      });
+    },
+
+    renderBlanks: function() {
+      var blankWidth = 50 * this.state.date.getDay();
+      return <span className="day" style={{width: blankWidth}}></span>
+    },
+    
+
+    daysOfMonth: function() {
+      var endOfMonth = new Date(this.state.date.getFullYear(), this.state.date.getMonth()+1, 0);
+      var dayNumbers = [];
+      for(var i = 1; i <= endOfMonth.getDate(); i++) {
+        dayNumbers.push(i);
+      }
+      return dayNumbers;  
+    },
+
+    renderDays: function() {
+      return this.daysOfMonth().map(function(number) {
+        return <Day number={number}  onClick={this.updateSelectedDay} />
+      }, this);
+    },
+
+    previousMonth: function() {
+      var year = this.state.date.getFullYear();
+      var month = this.state.date.getMonth();
+      this.setState({date: new Date(year, month - 1)});    
+    },
+    
+    nextMonth: function() {
+      var year = this.state.date.getFullYear();
+      var month = this.state.date.getMonth();
+      this.setState({date: new Date(year, month + 1)});    
+    },
+  
+    updateSelectedDay: function(dayNumber) {
+      this.setState({selectedDay: dayNumber});
+    },
+
+    render: function() {
+      return (
+        <div className="calendar">
+          <SelectedDay currentMonth={this.state.date} selectedDay={this.state.selectedDay} />
+          <PrevMonth date={this.state.date} onClick={this.previousMonth} />
+          <NextMonth date={this.state.date} onClick={this.nextMonth} />
+          <CurrentMonth date={this.state.date} />
+          {this.renderHeader()}
+          {this.renderBlanks()}
+          {this.renderDays()}
+        </div>
+      )
+    }
+
+  });
+
+  ReactDOM.render(<Calendar />, document.getElementById('container'));
+
+</script>

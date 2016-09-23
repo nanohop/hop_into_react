@@ -1,0 +1,22 @@
+<script src="https://fb.me/react-15.2.1.js"></script>
+<script src="https://fb.me/react-dom-15.2.1.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<style>
+  * {font-family: verdana; padding: 0; margin: 10px;}
+  body {background-color: #f5f5f5;}
+</style>
+
+<div id="container"></div>
+
+<script type="text/babel">
+
+  var Day = React.createClass({
+    render: function() {
+      return <span>{this.props.number}</span>
+    }
+  });
+
+  ReactDOM.render(<Day number={1} />, document.getElementById('container'));
+
+</script>
