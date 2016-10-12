@@ -6,7 +6,7 @@ class NoteList extends Component {
   render() {
     return (
       <div className="note-list">
-        <div>Notes <button>Add</button></div>
+        <h2>Notes <button>Add Note</button></h2>
         <ul>
           {
             this.props.notes.map((note, index) => {
