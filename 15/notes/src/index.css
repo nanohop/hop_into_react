@@ -1,0 +1,22 @@
+button:focus {
+  outline:0;
+}
+.notes-grid {
+  width:700px;
+}
+.note-editor {
+  margin-top: 100px;
+}
+.note-item {
+  width: 100%;
+}
+.note-item:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+.loading {
+  margin-top:100px;
+  font-size:20px;
+  text-align: center;
+  color:#888;
+}
