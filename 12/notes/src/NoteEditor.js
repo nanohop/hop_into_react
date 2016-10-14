@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 class NoteEditor extends Component {
 
   state = {
-    title: this.props.note.title,
-    note: this.props.note.note
+    id: this.props.note && this.props.note.id,
+    title: this.props.note && this.props.note.title,
+    text: this.props.note && this.props.note.text
   }
 
   titleChanged(e) {
@@ -12,7 +13,7 @@ class NoteEditor extends Component {
   }
 
   noteChanged(e) {
-    this.setState({note: e.target.value});
+    this.setState({text: e.target.value});
   }
 
   render() {
@@ -25,7 +26,7 @@ class NoteEditor extends Component {
           onChange={this.titleChanged.bind(this)} />
         <textarea rows="4" cols="50" 
           placeholder="Note" 
-          value={this.state.note} 
+          value={this.state.text} 
           onChange={this.noteChanged.bind(this)} />
         <button>Save</button>
       </div>

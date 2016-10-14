@@ -9,11 +9,11 @@ class NoteList extends Component {
         <h2>Notes <button>Add Note</button></h2>
         <ul>
           {
-            this.props.notes.map((note, index) => {
+            this.props.notes.map((note) => {
               return <NoteItem 
-                key={index} 
+                key={note.id} 
                 note={note} 
-                onClick={() => this.props.editNote(index)} />     
+                onClick={() => this.props.editNote(note.id)} />     
             })
           }
         </ul>
