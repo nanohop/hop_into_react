@@ -1,0 +1,9 @@
+button:focus {
+  outline:0;
+}
+.notes-grid {
+  width:700px;
+}
+.note-editor {
+  margin-top: 120px;
+}

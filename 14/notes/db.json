@@ -1,0 +1,18 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "A custom note",
+      "text": "Custom text in my custom note"
+    },
+    {
+      "id": 2,
+      "title": "Another customer note",
+      "text": "abc"
+    },
+    {
+      "id": 3,
+      "title": "And a third note"
+    }
+  ]
+}
