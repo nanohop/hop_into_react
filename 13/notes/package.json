@@ -1,0 +1,20 @@
+{
+  "name": "notes",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.6.1"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "scripts": {
+    "start": "npm run react-scripts-start & npm run json",
+    "react-scripts-start": "react-scripts start",
+    "json": "json-server --watch db.json --port 3001",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
