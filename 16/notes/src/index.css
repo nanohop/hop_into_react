@@ -1,0 +1,42 @@
+button:focus {
+  outline:0;
+}
+.notes-grid {
+  width:700px;
+}
+.note-editor {
+  margin-top: 100px;
+}
+.note-item {
+  width: 100%;
+}
+.note-item:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+.loading {
+  margin-top:100px;
+  font-size:20px;
+  text-align: center;
+  color:#888;
+}
+
+
+.wrapper {width:700px; margin: 0 auto;}
+.calendar {width: 350px; background: #06c; font-size: 20px; color: #fff; }
+.currentMonth {padding: 15px; text-align: center; border-bottom: 1px solid #fff;}
+.day {display: inline-block; width: 50px; padding: 12px 0; text-align: center;}
+.prev {float:left; padding: 15px 0 15px 10px;}
+.next {float:right; padding: 15px 10px 15px 0;}
+.selected {background-color: #fff; color: #06c;}
+
+.selectedDay {width: 330px; float:right; padding:0 10px;}
+.selectedDay input {font-size:20px; display: block; margin:10px 0;}
+.selectedDay button {float:right; line-height: 25px; font-size:18px;}
+.selectedDay ul {list-style: none; padding: 0;}
+.selectedDay li {padding: 10px; border-bottom: 1px solid #ddd;}
+
+.selectedDay li button {line-height:20px; font-size:16px;}
+.timer {margin-top:40px; font-size:30px;}
+.timer div {padding: 10px 0;}
+
